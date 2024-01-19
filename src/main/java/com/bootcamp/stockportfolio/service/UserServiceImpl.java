@@ -13,8 +13,8 @@ public class UserServiceImpl implements UserService{
     UserRepository userRepository;
 
     @Override
-    public UUID addUser(User user) {
+    public User addUser(User user) {
         userRepository.save(user);
-        return user.getId();
+        return user;
     }
 }
