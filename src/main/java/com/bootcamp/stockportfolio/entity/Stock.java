@@ -26,8 +26,18 @@ public class Stock {
     private final double closingPrice;
     private final double lastTradedPrice;
     private final double previousClosingPrice;
-    private final int numberOfTrades;
-    private final int numberOfShares;
+    private int numberOfTrades;
+    private int numberOfShares;
     private final double netTurnover;
     private final String tradingAndClearingIndicator;
+
+    public void updateStockQuantity(Trade trade) {
+        if(trade.getTradeType() == TradeType.BUY) {
+            numberOfShares -= trade.getQuantity();
+        }
+        else {
+            numberOfShares += trade.getQuantity();
+        }
+        numberOfTrades += 1;
+    }
 }

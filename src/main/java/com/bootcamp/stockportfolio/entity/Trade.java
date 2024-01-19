@@ -1,13 +1,9 @@
 package com.bootcamp.stockportfolio.entity;
 
 import com.bootcamp.stockportfolio.dto.CreateTradeRequest;
-import com.bootcamp.stockportfolio.repository.StockRepository;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -28,7 +24,7 @@ public class Trade {
     private final BigDecimal price;
 
     public Trade(CreateTradeRequest createTradeRequest, Stock stock) {
-        userId = createTradeRequest.userID();
+        userId = createTradeRequest.userId();
         stockId = createTradeRequest.stockId();
         quantity = createTradeRequest.quantity();
         tradeType = createTradeRequest.tradeType();

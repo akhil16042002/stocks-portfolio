@@ -30,7 +30,7 @@ public class TradeServiceImpl implements TradeService {
 
     @Override
     public ResponseEntity<Response<Trade>> createTrade(CreateTradeRequest createTradeRequest) {
-        Optional<User> optionalUser = userRepository.findById(createTradeRequest.userID());
+        Optional<User> optionalUser = userRepository.findById(createTradeRequest.userId());
         if(optionalUser.isEmpty()) {
             return Response.failed(HttpStatus.BAD_REQUEST, "User not found");
         }
@@ -45,6 +45,8 @@ public class TradeServiceImpl implements TradeService {
                 return Response.failed(HttpStatus.BAD_REQUEST, "Insufficient number of shares");
             }
             tradeRepository.save(trade);
+            stock.updateStockQuantity(trade);
+            stockRepository.save(stock);
             return Response.success(HttpStatus.OK, trade);
         }
         List<Trade> tradeList = tradeRepository.findByUserIdAndStockId(trade.getUserId(), trade.getStockId());
@@ -61,6 +63,8 @@ public class TradeServiceImpl implements TradeService {
             return Response.failed(HttpStatus.BAD_REQUEST, "Insufficient number of shares to sell");
         }
         tradeRepository.save(trade);
+        stock.updateStockQuantity(trade);
+        stockRepository.save(stock);
         return Response.success(HttpStatus.OK, trade);
     }
 }
