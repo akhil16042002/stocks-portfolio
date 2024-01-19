@@ -10,14 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import java.util.UUID;
 
 @Controller
 public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value = "/create-user")
+    @PostMapping(value = "/createUser")
     public ResponseEntity<Response<User>> onCreateUser(@RequestBody User user) {
         User getUser = userService.addUser(user);
         return Response.success(HttpStatus.OK, getUser);
