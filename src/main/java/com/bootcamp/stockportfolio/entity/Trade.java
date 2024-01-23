@@ -21,13 +21,13 @@ public class Trade {
     @Enumerated(value = EnumType.STRING)
     private final TradeType tradeType;
     @Column(columnDefinition = "NUMERIC(10, 4)")
-    private final BigDecimal price;
+    private final double price;
 
     public Trade(CreateTradeRequest createTradeRequest, Stock stock) {
         userId = createTradeRequest.userId();
         stockId = createTradeRequest.stockId();
         quantity = createTradeRequest.quantity();
         tradeType = createTradeRequest.tradeType();
-        price = BigDecimal.valueOf(stock.getLastTradedPrice());
+        price = stock.getLastTradedPrice();
     }
 }

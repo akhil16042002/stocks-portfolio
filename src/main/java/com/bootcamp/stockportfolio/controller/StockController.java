@@ -31,6 +31,6 @@ public class StockController {
     public ResponseEntity<Response<Stock>> onStockDetails(@PathVariable int stockId) {
         Optional<Stock> optionalStock = stockService.getStockDetails(stockId);
         return optionalStock.map(stock -> Response.success(HttpStatus.OK, stock))
-                .orElseGet(() -> Response.failed(HttpStatus.BAD_REQUEST, null));
+                .orElseGet(() -> Response.failed(HttpStatus.BAD_REQUEST, "Stock not found"));
     }
 }
